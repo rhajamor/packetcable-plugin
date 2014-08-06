@@ -1,0 +1,4 @@
+org.opendaylight.yang.gen.v1.urn.opendaylight.flow.traffic.profile.rev140120.$YangModelBindingProvider
+org.opendaylight.yang.gen.v1.urn.opendaylight.packetcable.service.rev140120.$YangModelBindingProvider
+org.opendaylight.yang.gen.v1.urn.opendaylight.node.cmts.rev140120.$YangModelBindingProvider
+org.opendaylight.yang.gen.v1.urn.opendaylight.model.match.types.rev140120.$YangModelBindingProvider

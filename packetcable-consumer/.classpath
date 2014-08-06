@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry including="**/*.java" kind="src" path="src/main/java"/>
+	<classpathentry including="**/*.java" kind="src" path="src/main/yang"/>
+	<classpathentry including="**/*.java" kind="src" path="src/main/yang-gen-config"/>
+	<classpathentry including="**/*.java" kind="src" path="src/main/yang-gen-sal"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="src" path="/packetcable-model"/>
+	<classpathentry kind="var" path="M2_REPO/org/opendaylight/yangtools/yang-binding/0.6.2-SNAPSHOT/yang-binding-0.6.2-SNAPSHOT.jar"/>
+	<classpathentry kind="var" path="M2_REPO/org/opendaylight/yangtools/concepts/0.6.2-SNAPSHOT/concepts-0.6.2-SNAPSHOT.jar"/>
+	<classpathentry kind="var" path="M2_REPO/org/opendaylight/yangtools/util/0.6.2-SNAPSHOT/util-0.6.2-SNAPSHOT.jar"/>
+	<classpathentry kind="var" path="M2_REPO/org/slf4j/slf4j-api/1.7.2/slf4j-api-1.7.2.jar"/>
+	<classpathentry kind="var" path="M2_REPO/com/google/guava/guava/14.0.1/guava-14.0.1.jar"/>
+	<classpathentry kind="var" path="M2_REPO/com/github/romix/java-concurrent-hash-trie-map/0.2.0/java-concurrent-hash-trie-map-0.2.0.jar"/>
+	<classpathentry kind="var" path="M2_REPO/org/opendaylight/yangtools/yang-common/0.6.2-SNAPSHOT/yang-common-0.6.2-SNAPSHOT.jar"/>
+	<classpathentry kind="var" path="M2_REPO/org/opendaylight/controller/config-api/0.2.5-SNAPSHOT/config-api-0.2.5-SNAPSHOT.jar"/>
+	<classpathentry kind="var" path="M2_REPO/com/google/code/findbugs/jsr305/2.0.1/jsr305-2.0.1.jar"/>
+	<classpathentry kind="var" path="M2_REPO/org/osgi/org.osgi.core/5.0.0/org.osgi.core-5.0.0.jar"/>
+	<classpathentry kind="var" path="M2_REPO/org/osgi/org.osgi.compendium/5.0.0/org.osgi.compendium-5.0.0.jar"/>
+	<classpathentry kind="var" path="M2_REPO/org/opendaylight/controller/sal-common-util/1.1-SNAPSHOT/sal-common-util-1.1-SNAPSHOT.jar"/>
+	<classpathentry kind="var" path="M2_REPO/org/opendaylight/controller/sal-common-api/1.1-SNAPSHOT/sal-common-api-1.1-SNAPSHOT.jar"/>
+	<classpathentry kind="var" path="M2_REPO/org/opendaylight/controller/sal-binding-api/1.1-SNAPSHOT/sal-binding-api-1.1-SNAPSHOT.jar"/>
+	<classpathentry kind="var" path="M2_REPO/org/opendaylight/controller/sal-binding-config/1.1-SNAPSHOT/sal-binding-config-1.1-SNAPSHOT.jar"/>
+	<classpathentry kind="output" path="target/classes"/>
+</classpath>
