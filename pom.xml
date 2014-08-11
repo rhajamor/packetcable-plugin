@@ -13,6 +13,7 @@
 	<packaging>pom</packaging>
 
 	<modules>
+		<module>packetcable-driver</module>
 		<module>packetcable-model</module>
 		<module>packetcable-consumer</module>
 		<module>packetcable-provider</module>
@@ -50,15 +51,15 @@
 		</dependency>
 	</dependencies>
 
-<!-- 	<profiles> -->
-<!-- 		<profile> -->
-<!-- 			<id>integrationtests</id> -->
-<!-- 			<activation> -->
-<!-- 				<activeByDefault>false</activeByDefault> -->
-<!-- 			</activation> -->
-<!-- 			<modules> -->
-<!-- 				<module>packetcable-it</module> -->
-<!-- 			</modules> -->
-<!-- 		</profile> -->
-<!-- 	</profiles> -->
+	<!-- <profiles> -->
+	<!-- <profile> -->
+	<!-- <id>integrationtests</id> -->
+	<!-- <activation> -->
+	<!-- <activeByDefault>false</activeByDefault> -->
+	<!-- </activation> -->
+	<!-- <modules> -->
+	<!-- <module>packetcable-it</module> -->
+	<!-- </modules> -->
+	<!-- </profile> -->
+	<!-- </profiles> -->
 </project>
