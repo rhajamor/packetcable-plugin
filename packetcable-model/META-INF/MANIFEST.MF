@@ -1,7 +1,7 @@
 Manifest-Version: 1.0
-Bnd-LastModified: 1407367706889
-Build-Jdk: 1.7.0_45
-Built-By: riadh
+Bnd-LastModified: 1408378480817
+Build-Jdk: 1.7.0_51
+Built-By: tkee
 Bundle-ManifestVersion: 2
 Bundle-Name: org.opendaylight.controller.packetcable.packetcable-model
 Bundle-SymbolicName: org.opendaylight.controller.packetcable.model
