@@ -12,6 +12,7 @@ workspace
 ## Compilation Files ##
 *.class
 **/target
+**/target-ide
 target
 target-ide
 MANIFEST.MF

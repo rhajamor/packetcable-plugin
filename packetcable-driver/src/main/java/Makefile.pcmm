@@ -1,0 +1,140 @@
+#
+# define compiler and compiler flag variables
+#
+JFLAGS = -g
+JC = javac
+JUNIT=/usr/share/junit/junit.jar
+CLASSPATH =  -classpath .:jcops.jar:$(JUNIT)
+JFLAGS = -encoding UTF-8  $(CLASSPATH) 
+JAR_PKG = pcmm.jar
+TARBALL = pcmm.tar.gz
+
+
+#
+# Clear any default targets for building .class files from .java files; we 
+# will provide our own target entry to do this in this makefile.
+# make has a set of default targets for different suffixes (like .c.o) 
+# Currently, clearing the default for .java.class is not necessary since 
+# make does not have a definition for this target, but later versions of 
+# make may, so it doesn't hurt to make sure that we clear any default 
+# definitions for these
+#
+
+.SUFFIXES: .java .class
+
+
+#
+# Here is our target entry for creating .class files from .java files 
+# This is a target entry that uses the suffix rule syntax:
+#	DSTS:
+#		rule
+#  'TS' is the suffix of the target file, 'DS' is the suffix of the dependency 
+#  file, and 'rule'  is the rule for building a target	
+# '$*' is a built-in macro that gets the basename of the current target 
+# Remember that there must be a < tab > before the command line ('rule') 
+#
+
+.java.class:
+	$(JC) $(JFLAGS) $*.java
+
+
+#
+# CLASSES is a macro consisting of 4 words (one for each java source file)
+#
+
+SOURCES = \
+	org/pcmm/objects/MMVersionInfo.java \
+	org/pcmm/gates/IAMID.java \
+	org/pcmm/gates/IClassifier.java \
+	org/pcmm/gates/IExtendedClassifier.java \
+	org/pcmm/gates/IGateSpec.java \
+	org/pcmm/gates/IIPv6Classifier.java \
+	org/pcmm/gates/IPCMMGate.java \
+	org/pcmm/gates/ISubscriberID.java \
+	org/pcmm/gates/ITrafficProfile.java \
+	org/pcmm/messages/IMessage.java \
+	org/pcmm/messages/IMessageFactory.java \
+	org/pcmm/messages/impl/MessageFactory.java \
+	org/pcmm/PCMMDef.java \
+	org/pcmm/PCMMPdpAgent.java \
+	org/pcmm/PCMMPdpDataProcess.java \
+	org/pcmm/PCMMPepAgent.java \
+	org/pcmm/PCMMPdpMsgSender.java \
+	org/pcmm/rcd/ICMTS.java \
+	org/pcmm/rcd/impl/AbstractPCMMClient.java \
+	org/pcmm/rcd/impl/AbstractPCMMServer.java \
+	org/pcmm/rcd/impl/CMTS.java \
+	org/pcmm/rcd/impl/PCMMPolicyServer.java \
+	org/pcmm/scd/IApplicationServer.java \
+	org/pcmm/state/IPCMMRecordKeepingServer.java \
+	org/pcmm/state/IState.java \
+	org/pcmm/state/IStateful.java \
+	org/pcmm/PCMMGlobalConfig.java \
+	org/pcmm/base/IPCMMBaseObject.java \
+	org/pcmm/base/impl/PCMMBaseObject.java \
+	org/pcmm/gates/IGateID.java \
+	org/pcmm/gates/ISessionClassID.java \
+	org/pcmm/gates/ITransactionID.java \
+	org/pcmm/gates/impl/AMID.java \
+	org/pcmm/gates/impl/Classifier.java \
+	org/pcmm/gates/impl/DOCSISServiceClassNameTrafficProfile.java \
+	org/pcmm/gates/impl/ExtendedClassifier.java \
+	org/pcmm/gates/impl/GateID.java \
+	org/pcmm/gates/impl/GateSpec.java \
+	org/pcmm/gates/impl/PCMMGateReq.java \
+	org/pcmm/gates/impl/SessionClassID.java \
+	org/pcmm/gates/impl/SubscriberID.java \
+	org/pcmm/gates/impl/TransactionID.java \
+	org/pcmm/messages/impl/COPSDecisionMsgEX.java \
+	org/pcmm/rcd/IPCMMClient.java \
+	org/pcmm/rcd/IPCMMPolicyServer.java \
+	org/pcmm/rcd/IPCMMServer.java \
+	org/pcmm/utils/PCMMError.java \
+	org/pcmm/gates/impl/BestEffortService.java \
+	org/pcmm/gates/IPCError.java \
+	org/pcmm/gates/impl/PCError.java \
+	org/pcmm/PCMMPdpConnection.java  \
+	org/pcmm/PCMMPdpReqStateMan.java \
+	org/pcmm/utils/PCMMUtils.java \
+	org/pcmm/objects//PCMMIDHolder.java \
+	org/pcmm/objects//PCMMResource.java \
+	org/pcmm/objects//PCMMResourceSet.java \
+	org/pcmm/objects//PCMMResourcesMapper.java \
+	org/pcmm/utils/PCMMLogger.java 
+
+
+
+
+CLASSES = $(SOURCES:%.java=%.class)
+
+#
+# the default make target entry
+#
+
+default: classes jar
+
+
+#
+# This target entry uses Suffix Replacement within a macro: 
+# $(name:string1=string2)
+# 	In the words in the macro named 'name' replace 'string1' with 'string2'
+# Below we are replacing the suffix .java of all words in the macro CLASSES 
+# with the .class suffix
+#
+
+classes: $(SOURCES:.java=.class)
+
+jar:
+	jar cvf $(JAR_PKG) $(CLASSES) org/pcmm/messages/*.class org/pcmm/gates/*.class org/pcmm/rcd/impl/*.class org/pcmm/rcd/*.class org/pcmm/messages/impl/*.class org/pcmm/gates/impl/*.class
+
+tar:
+	tar czpf $(TARBALL) $(SOURCES) Makefile
+
+
+#
+# RM is a predefined macro in make (RM = rm -f)
+#
+
+clean:
+	$(RM) $(CLASSES) $(JAR_PKG)
+

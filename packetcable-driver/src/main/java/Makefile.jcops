@@ -1,0 +1,155 @@
+#
+# define compiler and compiler flag variables
+#
+
+JFLAGS = -g
+JC = javac -classpath .
+JAR_PKG = jcops.jar
+TARBALL = jcops.tar.gz
+
+#
+# Clear any default targets for building .class files from .java files; we 
+# will provide our own target entry to do this in this makefile.
+# make has a set of default targets for different suffixes (like .c.o) 
+# Currently, clearing the default for .java.class is not necessary since 
+# make does not have a definition for this target, but later versions of 
+# make may, so it doesn't hurt to make sure that we clear any default 
+# definitions for these
+#
+
+.SUFFIXES: .java .class
+
+
+#
+# Here is our target entry for creating .class files from .java files 
+# This is a target entry that uses the suffix rule syntax:
+#	DSTS:
+#		rule
+#  'TS' is the suffix of the target file, 'DS' is the suffix of the dependency 
+#  file, and 'rule'  is the rule for building a target	
+# '$*' is a built-in macro that gets the basename of the current target 
+# Remember that there must be a < tab > before the command line ('rule') 
+#
+
+.java.class:
+	$(JC) $(JFLAGS) $*.java
+
+
+#
+# SOURCES files
+
+SOURCES = \
+ 	org/umu/cops/common/COPS_def.java \
+ 	org/umu/cops/common/COPSDebug.java \
+ 	org/umu/cops/stack/COPSAcctTimer.java \
+  	org/umu/cops/stack/COPSClientAcceptMsg.java \
+  	org/umu/cops/stack/COPSClientCloseMsg.java \
+  	org/umu/cops/stack/COPSClientOpenMsg.java \
+ 	org/umu/cops/stack/COPSClientSI.java \
+  	org/umu/cops/stack/COPSContext.java \
+ 	org/umu/cops/stack/COPSData.java \
+  	org/umu/cops/stack/COPSDecision.java \
+  	org/umu/cops/stack/COPSDecisionMsg.java \
+  	org/umu/cops/stack/COPSDeleteMsg.java \
+  	org/umu/cops/stack/COPSError.java \
+ 	org/umu/cops/stack/COPSException.java \
+ 	org/umu/cops/stack/COPSHandle.java \
+  	org/umu/cops/stack/COPSHeader.java \
+  	org/umu/cops/stack/COPSIntegrity.java \
+ 	org/umu/cops/stack/COPSInterface.java \
+ 	org/umu/cops/stack/COPSIpv4Address.java \
+ 	org/umu/cops/stack/COPSIpv4InInterface.java \
+ 	org/umu/cops/stack/COPSIpv4Interface.java \
+ 	org/umu/cops/stack/COPSIpv4LastPdpAddr.java \
+ 	org/umu/cops/stack/COPSIpv4OutInterface.java \
+ 	org/umu/cops/stack/COPSIpv4PdpAddress.java \
+ 	org/umu/cops/stack/COPSIpv6Address.java \
+ 	org/umu/cops/stack/COPSIpv6InInterface.java \
+ 	org/umu/cops/stack/COPSIpv6Interface.java \
+ 	org/umu/cops/stack/COPSIpv6LastPdpAddr.java \
+ 	org/umu/cops/stack/COPSIpv6OutInterface.java \
+ 	org/umu/cops/stack/COPSIpv6PdpAddress.java \
+  	org/umu/cops/stack/COPSKAMsg.java \
+ 	org/umu/cops/stack/COPSKATimer.java \
+ 	org/umu/cops/stack/COPSLPDPDecision.java \
+ 	org/umu/cops/stack/COPSMsg.java \
+ 	org/umu/cops/stack/COPSMsgParser.java \
+ 	org/umu/cops/stack/COPSObjBase.java \
+  	org/umu/cops/stack/COPSObjHeader.java \
+ 	org/umu/cops/stack/COPSPdpAddress.java \
+ 	org/umu/cops/stack/COPSPepId.java \
+ 	org/umu/cops/stack/COPSPrClassError.java \
+ 	org/umu/cops/stack/COPSPrefixPrID.java \
+ 	org/umu/cops/stack/COPSPrEPD.java \
+ 	org/umu/cops/stack/COPSPrError.java \
+ 	org/umu/cops/stack/COPSPrErrorPRID.java \
+ 	org/umu/cops/stack/COPSPrGlobalError.java \
+ 	org/umu/cops/stack/COPSPrID.java \
+  	org/umu/cops/stack/COPSPrObjBase.java \
+  	org/umu/cops/stack/COPSReason.java \
+  	org/umu/cops/stack/COPSReportMsg.java \
+	org/umu/cops/stack/COPSReportType.java \
+	org/umu/cops/stack/COPSReqMsg.java \
+	org/umu/cops/stack/COPSSyncStateMsg.java \
+	org/umu/cops/stack/COPSTimer.java \
+	org/umu/cops/stack/COPSTransceiver.java \
+	org/umu/cops/stack/COPSUtil.java \
+ 	org/umu/cops/ospdp/COPSPdpException.java \
+  	org/umu/cops/ospdp/COPSPdpOSAgent.java \
+  	org/umu/cops/ospdp/COPSPdpOSConnection.java \
+ 	org/umu/cops/ospdp/COPSPdpOSDataProcess.java \
+  	org/umu/cops/ospdp/COPSPdpOSMsgSender.java \
+  	org/umu/cops/ospdp/COPSPdpOSReqStateMan.java \
+ 	org/umu/cops/ospep/COPSPepException.java \
+  	org/umu/cops/ospep/COPSPepOSAgent.java \
+  	org/umu/cops/ospep/COPSPepOSConnection.java \
+ 	org/umu/cops/ospep/COPSPepOSDataProcess.java \
+ 	org/umu/cops/ospep/COPSPepOSEventListener.java \
+  	org/umu/cops/ospep/COPSPepOSMsgSender.java \
+  	org/umu/cops/ospep/COPSPepOSReqStateMan.java \
+  	org/umu/cops/prpdp/COPSPdpAgent.java \
+  	org/umu/cops/prpdp/COPSPdpConnection.java \
+ 	org/umu/cops/prpdp/COPSPdpDataProcess.java \
+ 	org/umu/cops/prpdp/COPSPdpException.java \
+  	org/umu/cops/prpdp/COPSPdpMsgSender.java \
+  	org/umu/cops/prpdp/COPSPdpReqStateMan.java \
+  	org/umu/cops/prpep/COPSPepAgent.java \
+  	org/umu/cops/prpep/COPSPepConnection.java \
+ 	org/umu/cops/prpep/COPSPepDataProcess.java \
+ 	org/umu/cops/prpep/COPSPepException.java \
+  	org/umu/cops/prpep/COPSPepMsgSender.java \
+  	org/umu/cops/prpep/COPSPepReqStateMan.java 
+
+
+CLASSES = $(SOURCES:%.java=%.class)
+
+#
+# the default make target entry
+#
+
+default: classes jar
+
+#
+# This target entry uses Suffix Replacement within a macro: 
+# $(name:string1=string2)
+# 	In the words in the macro named 'name' replace 'string1' with 'string2'
+# Below we are replacing the suffix .java of all words in the macro CLASSES 
+# with the .class suffix
+#
+
+classes: $(SOURCES:.java=.class)
+
+jar:
+	jar cvf $(JAR_PKG) $(CLASSES)
+
+tar:
+	tar czpf $(TARBALL) $(SOURCES) Makefile
+
+
+#
+# RM is a predefined macro in make (RM = rm -f)
+#
+
+clean:
+	$(RM) $(CLASSES)  $(JAR_PKG)
+
