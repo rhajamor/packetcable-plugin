@@ -15,8 +15,6 @@ import org.opendaylight.controller.md.sal.binding.api.WriteTransaction;
 import org.opendaylight.controller.md.sal.common.api.data.AsyncDataChangeEvent;
 import org.opendaylight.controller.md.sal.common.api.data.LogicalDatastoreType;
 import org.opendaylight.controller.sal.binding.api.NotificationProviderService;
-import org.opendaylight.yang.gen.v1.urn.opendaylight.flow.traffic.profile.rev140120.TrafficProfileBestEffort;
-import org.opendaylight.yang.gen.v1.urn.opendaylight.flow.traffic.profile.rev140120.TrafficProfileBestEffortBuilder;
 import org.opendaylight.yang.gen.v1.urn.opendaylight.flow.transaction.rev131103.TransactionId;
 import org.opendaylight.yang.gen.v1.urn.opendaylight.node.cmts.rev140120.CmtsInstance;
 import org.opendaylight.yang.gen.v1.urn.opendaylight.packetcable.service.rev140120.CmtsAddInput;
@@ -37,10 +35,8 @@ import org.opendaylight.yang.gen.v1.urn.opendaylight.packetcable.service.rev1401
 import org.opendaylight.yang.gen.v1.urn.opendaylight.packetcable.service.rev140120.PacketcableServiceService;
 import org.opendaylight.yang.gen.v1.urn.opendaylight.packetcable.service.rev140120.TrafficProfileGetDefaultsBestEffortInput;
 import org.opendaylight.yang.gen.v1.urn.opendaylight.packetcable.service.rev140120.TrafficProfileGetDefaultsBestEffortOutput;
-import org.opendaylight.yang.gen.v1.urn.opendaylight.packetcable.service.rev140120.TrafficProfileGetDefaultsBestEffortOutputBuilder;
 import org.opendaylight.yang.gen.v1.urn.opendaylight.packetcable.service.rev140120.TrafficProfileGetDefaultsDownstreamServiceInput;
 import org.opendaylight.yang.gen.v1.urn.opendaylight.packetcable.service.rev140120.TrafficProfileGetDefaultsDownstreamServiceOutput;
-import org.opendaylight.yang.gen.v1.urn.opendaylight.packetcable.service.rev140120.TrafficProfileGetDefaultsDownstreamServiceOutputBuilder;
 import org.opendaylight.yang.gen.v1.urn.opendaylight.packetcable.service.rev140120.TrafficProfileGetDefaultsFlowspecInput;
 import org.opendaylight.yang.gen.v1.urn.opendaylight.packetcable.service.rev140120.TrafficProfileGetDefaultsFlowspecOutput;
 import org.opendaylight.yang.gen.v1.urn.opendaylight.packetcable.service.rev140120.TrafficProfileGetDefaultsNonRealTimePollingServiceInput;
@@ -65,7 +61,6 @@ import org.opendaylight.yang.gen.v1.urn.opendaylight.packetcable.service.rev1401
 import org.opendaylight.yang.gen.v1.urn.opendaylight.packetcable.service.rev140120.TrafficProfileUpdateDefaultsUnsolicitedGrantServiceOutput;
 import org.opendaylight.yang.gen.v1.urn.opendaylight.packetcable.service.rev140120.TrafficProfileUpdateDefaultsUnsolicitedGrantServiceWithActivityDetectionInput;
 import org.opendaylight.yang.gen.v1.urn.opendaylight.packetcable.service.rev140120.TrafficProfileUpdateDefaultsUnsolicitedGrantServiceWithActivityDetectionOutput;
-import org.opendaylight.yang.gen.v1.urn.opendaylight.packetcable.service.rev140120.TrafficProfileUpdateDefaultsUnsolicitedGrantServiceWithActivityDetectionOutputBuilder;
 import org.opendaylight.yangtools.yang.binding.DataObject;
 import org.opendaylight.yangtools.yang.binding.InstanceIdentifier;
 import org.opendaylight.yangtools.yang.common.RpcResult;
@@ -170,7 +165,7 @@ public class OpendaylightPacketcableProvider implements
 
 	@Override
 	public Future<RpcResult<CmtsAddOutput>> cmtsAdd(CmtsAddInput input) {
-		// TODO how to get this transaction id ???
+		//TODO how to get this transaction id ???
 		TransactionId transactionId = null;
 		if (transactionId != null) {
 			CmtsAdded cmtsAdded = new CmtsAddedBuilder().setCmtsRef(input.getCmtsRef()).setId(input.getId()).setConfigurationPoints(input.getConfigurationPoints()).setTransactionUri(input.getTransactionUri()).setTransactionId(transactionId).setNode(input.getNode()).setManagedCableModemSubscribers(input.getManagedCableModemSubscribers()).build();
@@ -185,49 +180,38 @@ public class OpendaylightPacketcableProvider implements
 	@Override
 	public Future<RpcResult<CmtsRemoveOutput>> cmtsRemove(CmtsRemoveInput input) {
 		TransactionId transactionId = null;
-		// if (transactionId != null) {
-		CmtsRemoved cmtsRemoved = new CmtsRemovedBuilder().setCmtsRef(input.getCmtsRef()).setId(input.getId()).setConfigurationPoints(input.getConfigurationPoints()).setTransactionUri(input.getTransactionUri()).setTransactionId(transactionId).setNode(input.getNode()).setManagedCableModemSubscribers(input.getManagedCableModemSubscribers()).build();
-		notificationProvider.publish(cmtsRemoved);
-		CmtsRemoveOutput output = new CmtsRemoveOutputBuilder().setTransactionId(transactionId).build();
-		return Futures.immediateFuture(RpcResultBuilder.success(output).build());
-		// } else {
-		// return Futures.immediateFuture(RpcResultBuilder.<CmtsRemoveOutput>
-		// failed().build());
-		// }
+		if (transactionId != null) {
+			CmtsRemoved cmtsRemoved = new CmtsRemovedBuilder().setCmtsRef(input.getCmtsRef()).setId(input.getId()).setConfigurationPoints(input.getConfigurationPoints()).setTransactionUri(input.getTransactionUri()).setTransactionId(transactionId).setNode(input.getNode()).setManagedCableModemSubscribers(input.getManagedCableModemSubscribers()).build();
+			notificationProvider.publish(cmtsRemoved);
+			CmtsRemoveOutput output = new CmtsRemoveOutputBuilder().setTransactionId(transactionId).build();
+			return Futures.immediateFuture(RpcResultBuilder.success(output).build());
+		} else {
+			return Futures.immediateFuture(RpcResultBuilder.<CmtsRemoveOutput> failed().build());
+		}
 	}
 
 	@Override
 	public Future<RpcResult<CmtsUpdateOutput>> cmtsUpdate(CmtsUpdateInput input) {
 		TransactionId transactionId = null;
-		// if (transactionId != null) {
-		CmtsUpdated cmtsUpdated = new CmtsUpdatedBuilder().setCmtsRef(input.getCmtsRef()).setId(input.getOriginalCmts().getId()).setConfigurationPoints(input.getOriginalCmts().getConfigurationPoints()).setTransactionUri(input.getTransactionUri()).setTransactionId(transactionId).setNode(input.getNode()).setManagedCableModemSubscribers(input.getOriginalCmts().getManagedCableModemSubscribers()).build();
-		notificationProvider.publish(cmtsUpdated);
-		CmtsUpdateOutput output = new CmtsUpdateOutputBuilder().setTransactionId(transactionId).build();
-		return Futures.immediateFuture(RpcResultBuilder.success(output).build());
-		// } else {
-		// return Futures.immediateFuture(RpcResultBuilder.<CmtsUpdateOutput>
-		// failed().build());
-		// }
+		if (transactionId != null) {
+			CmtsUpdated cmtsUpdated = new CmtsUpdatedBuilder().setCmtsRef(input.getCmtsRef()).setId(input.getOriginalCmts().getId()).setConfigurationPoints(input.getOriginalCmts().getConfigurationPoints()).setTransactionUri(input.getTransactionUri()).setTransactionId(transactionId).setNode(input.getNode()).setManagedCableModemSubscribers(input.getOriginalCmts().getManagedCableModemSubscribers()).build();
+			notificationProvider.publish(cmtsUpdated);
+			CmtsUpdateOutput output = new CmtsUpdateOutputBuilder().setTransactionId(transactionId).build();
+			return Futures.immediateFuture(RpcResultBuilder.success(output).build());
+		} else {
+			return Futures.immediateFuture(RpcResultBuilder.<CmtsUpdateOutput> failed().build());
+		}
 	}
 
 	@Override
 	public Future<RpcResult<TrafficProfileGetDefaultsBestEffortOutput>> trafficProfileGetDefaultsBestEffort(TrafficProfileGetDefaultsBestEffortInput input) {
-		//
-		// TrafficProfileBestEffort tpbesteffort=new
-		// TrafficProfileBestEffortBuilder().setAuthorizedEnvelope(value)
-		// TrafficProfileGetDefaultsBestEffortOutput bestEffortOutput=new
-		// TrafficProfileGetDefaultsBestEffortOutputBuilder().
-		// setOriginalTp(null).setTransactionId(i)
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
 	public Future<RpcResult<TrafficProfileGetDefaultsDownstreamServiceOutput>> trafficProfileGetDefaultsDownstreamService(TrafficProfileGetDefaultsDownstreamServiceInput input) {
-
-		// TrafficProfileGetDefaultsDownstreamServiceOutput output = new
-		// TrafficProfileGetDefaultsDownstreamServiceOutputBuilder().setOriginalTp(input.get)
-		//
+		// TODO Auto-generated method stub
 		return null;
 	}
 
@@ -299,9 +283,7 @@ public class OpendaylightPacketcableProvider implements
 
 	@Override
 	public Future<RpcResult<TrafficProfileUpdateDefaultsUnsolicitedGrantServiceWithActivityDetectionOutput>> trafficProfileUpdateDefaultsUnsolicitedGrantServiceWithActivityDetection(TrafficProfileUpdateDefaultsUnsolicitedGrantServiceWithActivityDetectionInput input) {
-		// TrafficProfileUpdateDefaultsUnsolicitedGrantServiceWithActivityDetectionOutput
-		// activityDetectionOutput = new
-		// TrafficProfileUpdateDefaultsUnsolicitedGrantServiceWithActivityDetectionOutputBuilder().setTransactionId(input.g)
+		// TODO Auto-generated method stub
 		return null;
 	}
 
