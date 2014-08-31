@@ -12,7 +12,6 @@ import org.opendaylight.yang.gen.v1.urn.opendaylight.packetcable.service.rev1401
 import org.opendaylight.yang.gen.v1.urn.opendaylight.packetcable.service.rev140120.CmtsRemoved;
 import org.opendaylight.yang.gen.v1.urn.opendaylight.packetcable.service.rev140120.CmtsUpdated;
 import org.opendaylight.yang.gen.v1.urn.opendaylight.packetcable.service.rev140120.PacketcableServiceService;
-import org.pcmm.rcd.IPCMMClient;
 import org.pcmm.rcd.IPCMMPolicyServer;
 import org.pcmm.rcd.IPCMMPolicyServer.IPSCMTSClient;
 import org.pcmm.rcd.impl.PCMMPolicyServer;
