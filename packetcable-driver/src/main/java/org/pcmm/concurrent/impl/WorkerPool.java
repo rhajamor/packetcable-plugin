@@ -46,7 +46,7 @@ public class WorkerPool implements IWorkerPool {
 	public int schedule(IWorker worker, int t) {
 		if (worker == null)
 			return -1;
-		logger.debug("woker[" + worker + "] added, starts in " + t + " ms");
+		logger.debug("worker[" + worker + "] added, starts in " + t + " ms");
 		WeakReference<IWorker> workerRef = new WeakReference<IWorker>(worker);
 		int ref = workerRef.hashCode();
 		workersMap.put(ref, workerRef);
