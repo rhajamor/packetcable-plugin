@@ -7,7 +7,6 @@
     <version>1.1-SNAPSHOT</version>
   </parent>
   <artifactId>packetcable-karaf</artifactId>
-  <groupId>org.opendaylight.packetcable</groupId>
   <packaging>pom</packaging>
   <prerequisites>
     <maven>3.0</maven>
