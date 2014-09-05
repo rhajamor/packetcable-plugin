@@ -6,7 +6,8 @@ module pcmm-service-impl {
 
     import config { prefix config; revision-date 2013-04-05; }
     import rpc-context { prefix rpcx; revision-date 2013-06-17; }
-
+	import packetcable-cmts{ prefix cmts; revision-date 2014-01-20;}
+    
     import opendaylight-md-sal-binding { prefix mdsal; revision-date 2013-10-28; }
 
     description
@@ -74,6 +75,7 @@ module pcmm-service-impl {
           "Shortcut JMX call to send a gate-set message for testing.";
           
         input {
+        	uses cmts:cmts-node-attributes;
             uses rpcx:rpc-context-ref {
                 refine context-instance {
                     rpcx:rpc-context-instance send-gate-set-rpc;

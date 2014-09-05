@@ -137,7 +137,7 @@ public class PCMMPolicyServer extends AbstractPCMMServer implements
 							throw new PCMMException(new PCMMError(error.getErrCode(), error.getErrSubCode()));
 						} else // Request
 						if (reqMsg.getHeader().isARequest()) {
-							logger.debug("Received REQ message form CMTS");
+							logger.debug("Received REQ message from CMTS");
 							// end connection attempts
 							COPSReqMsg req = (COPSReqMsg) reqMsg;
 							// set the client handle to be used later by the
@@ -186,7 +186,7 @@ public class PCMMPolicyServer extends AbstractPCMMServer implements
 
 		public PSCMTSClient() {
 			super();
-			logger.info("Client " + getClass() + hashCode() + " crated and started");
+			logger.info("Client " + getClass() + hashCode() + " created and started");
 		}
 
 		public PSCMTSClient(Socket socket) {
@@ -211,6 +211,14 @@ public class PCMMPolicyServer extends AbstractPCMMServer implements
 			// GATE SPEC
 			IGateSpec gateSpec = getGateSpec();
 			ISubscriberID subscriberID = new SubscriberID();
+			// XXX - Fix no subID
+        		try {
+				InetAddress subIP = InetAddress.getByName(PCMMGlobalConfig.SubscriberID);
+                        	subscriberID.setSourceIPAddress(subIP);
+        		} catch (UnknownHostException unae) {
+            			logger.error("Error getByName" + unae.getMessage());
+        		}
+
 			// Classifier if MM version <4, Extended Classifier else
 			IClassifier eclassifier = getClassifier(subscriberID);
 
